@@ -1,10 +1,10 @@
 "use client";
-
+import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import React, { useState, useEffect } from "react";
 import Spline from "@splinetool/react-spline";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
-
+import {motion} from "framer-motion";
 const HeroSection = () => {
   const [countdown, setCountdown] = useState({
     days: 0,
@@ -43,26 +43,14 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToContent = () => {
-    // You can specify the ID of the section you want to scroll to
-    const contentElement = document.getElementById("content-section");
-    if (contentElement) {
-      contentElement.scrollIntoView({ behavior: "smooth" });
-    } else {
-      // If no specific ID is found, just scroll down a screen height
-      window.scrollTo({
-        top: window.innerHeight,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <div className="relative font-jersey w-full min-h-screen lg:min-h-[90vh] bg-black overflow-hidden flex flex-col">
       <div className="container mx-auto px-4 py-8 flex-grow">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* Spline Model Container - Full width on mobile, left side on desktop */}
-          <div className="w-full lg:w-1/2 h-[50vh] lg:h-[70vh] order-2 lg:order-1">
+          <div className="w-full lg:w-1/2 h-[50vh] lg:h-[70vh] relative order-2 lg:order-1">
+          <div className="h-[55px] w-[200px] bottom-1 right-0 bg-black absolute"></div>
             <Spline scene="https://prod.spline.design/YrjdCaszJ9zPSoSp/scene.splinecode" />
           </div>
 
@@ -73,63 +61,45 @@ const HeroSection = () => {
             </h1>
 
             {/* Countdown Timer */}
-            <div className="text-white mt-4 mb-8">
-              <p className="text-5xl mb-2">Coming Soon</p>
-              <div className="grid grid-cols-4 gap-4 mt-2">
-                <div className="flex flex-col items-center">
-                  <div className="bg-gray-800 px-4 py-2 rounded-lg min-w-[70px]">
-                    <span className="text-3xl">{countdown.days}</span>
-                  </div>
-                  <span className="text-sm mt-1">Days</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="bg-gray-800 px-4 py-2 rounded-lg min-w-[70px]">
-                    <span className="text-3xl">{countdown.hours}</span>
-                  </div>
-                  <span className="text-sm mt-1">Hours</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="bg-gray-800 px-4 py-2 rounded-lg min-w-[70px]">
-                    <span className="text-3xl">{countdown.minutes}</span>
-                  </div>
-                  <span className="text-sm mt-1">Minutes</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="bg-gray-800 px-4 py-2 rounded-lg min-w-[70px]">
-                    <span className="text-3xl">{countdown.seconds}</span>
-                  </div>
-                  <span className="text-sm mt-1">Seconds</span>
-                </div>
-              </div>
+            <div className="text-white mt-6 mb-10 text-center">
+      <p className="text-lg font-mono tracking-widest opacity-80">
+        Coming Soon
+      </p>
+      <div className="grid grid-cols-4 gap-4 mt-4 font-mono text-white/75">
+        {(["days", "hours", "minutes", "seconds"] as const).map((unit, index) => (
+          <motion.div
+            key={unit}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            className="flex flex-col items-center"
+          >
+            <div className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl min-w-[80px] shadow-lg border border-white/20">
+              <span className="text-4xl font-bold">{countdown[unit]}</span>
             </div>
+            <span className="text-xs mt-2 uppercase tracking-wide opacity-80">
+              {unit}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+    </div>
 
             {/* Optional: Add a CTA button */}
-            <HoverBorderGradient
+            <InteractiveHoverButton
               onClick={() =>
                 window.open("https://rajalakshmi.org/innovision25", "_blank")
               }
-              containerClassName="rounded-full"
-              as="button"
-              className="bg-black text-3xl cursor-pointer text-white py-2 px-6 rounded-full hover:bg-gray-200 hover:text-black"
-            >
+             className="font-mono"
+           >
               Register
-            </HoverBorderGradient>
+            </InteractiveHoverButton>
           </div>
         </div>
       </div>
 
-      {/* Scroll to Explore Indicator */}
-      <div
-        className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white cursor-pointer"
-        onClick={scrollToContent}
-      >
-        <span className="text-sm mb-2 font-light tracking-wider">
-          SCROLL TO EXPLORE
-        </span>
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center p-1">
-          <div className="w-1 bg-white rounded-full animate-scroll-down"></div>
-        </div>
-      </div>
+      
+     
 
       {/* Black box at bottom right - keep it visible on all screen sizes */}
       <div className="bg-black h-[60px] w-[250px] absolute bottom-0 right-0 z-10"></div>
@@ -160,6 +130,7 @@ const HeroSection = () => {
           animation: scrollDown 2s ease-in-out infinite;
         }
       `}</style>
+      
     </div>
   );
 };

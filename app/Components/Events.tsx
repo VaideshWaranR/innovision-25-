@@ -3,19 +3,22 @@ import React from "react";
 
 import { AnimatePresence, motion } from "motion/react";
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
+import Image from "next/image";
 const Events = () => {
   return (
     <div className="bg-black">
-      <div className="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <div className="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto px-8 sm:px-6 lg:px-8 max-w-7xl place-items-center">
         <Card
           title="POWEROID"
           ti="WOMEN SKILL DEVELOPMENT"
           dec="In 2023, women empowerment continues to be a global priority, with progress made in many areas such as education, healthcare, and political representation. However, there is still a long way to go in achieving true gender equality. Governments, businesses, and individuals must take active steps to break down systemic barriers and support women's advancement."
           icon={<AceternityIcon />}
+          im='relaxed'
         >
           <CanvasRevealEffect
             animationSpeed={5.1}
-            containerClassName="bg-emerald-900"
+            // containerClassName="bg-emerald-900"
+            containerClassName="bg-black"
           />
         </Card>
         <Card
@@ -23,6 +26,7 @@ const Events = () => {
           ti="SMART SYSTEM ON FOOD, AGRICULTURE, WATER, EDUCATION, HEALTH CARE AND TRANSPORTATION"
           dec="Smart systems are revolutionizing the way we approach health, transport, and agriculture. In health, smart systems monitor patients remotely, streamline medical record keeping, and aid in personalized care. In transport, smart systems optimize traffic flow, reduce emissions, and increase the speed and reliability of transportation services"
           icon={<AceternityIcon />}
+          im='smart'
         >
           <CanvasRevealEffect
             animationSpeed={3}
@@ -41,10 +45,12 @@ const Events = () => {
           ti="ASSISTIVE TECHNOLOGIES FOR ELDERLY AND SPECIAL CHILDREN"
           dec="Assistive technologies help elderly and special needs children with various tasks, from mobility aids to communication devices, enabling them to live more independently. Examples include hearing aids, wheelchairs, adaptive switches, and speech synthesizers. These technologies improve quality of life and provide essential support for daily living"
           icon={<AceternityIcon />}
+          im='old'
         >
           <CanvasRevealEffect
             animationSpeed={3}
-            containerClassName="bg-sky-600"
+            containerClassName="bg-black"
+            // containerClassName="bg-sky-600"
             colors={[[125, 211, 252]]}
           />
         </Card>
@@ -53,17 +59,20 @@ const Events = () => {
           ti="INTELLIGENT TECHNOLOGY TOWARDS COMMUNITY HELPERS"
           dec="Intelligent technology can aid community helpers by automating tasks, improving communication and increasing efficiency, ultimately leading to better outcomes for those in need. This can be achieved through the use of AI, machine learning and other cutting-edge technologies"
           icon={<AceternityIcon />}
+          im='future'
         >
           <CanvasRevealEffect
             animationSpeed={3}
-            containerClassName="bg-emerald-900"
+            containerClassName="bg-black"
+            // containerClassName="bg-emerald-900"
           />
         </Card>
         <Card
           title="OTHERS"
           ti="OPEN DOMAIN"
-          dec="This domain serves as a platform for participants to delve into a myriad of topics spanning across diverse fields. From exploring innovative solutions for environmental sustainability and showcasing cutting-edge technologies to addressing social challenges and envisioning the future of work, this domain encapsulates a broad spectrum of interests and expertise. We encourage participants to bring forth their unique perspectives, research findings, and visionary concepts , contributing to a rich tapestry of knowledge exchange and thought-provoking discussions."
+          dec="This domain serves as a platform for exploring diverse topics, from environmental sustainability and emerging technologies to social challenges and the future of work. Participants are encouraged to share unique perspectives, research, and visionary ideas, fostering knowledge exchange and thought-provoking discussions."
           icon={<AceternityIcon />}
+          im='open-source'
         >
           <CanvasRevealEffect
             animationSpeed={3}
@@ -85,19 +94,22 @@ const Card = ({
   children,
   ti,
   dec,
+  im
 }: {
   title: string;
   ti: string;
   dec: string;
   icon: React.ReactNode;
   children?: React.ReactNode;
+  im:string;
 }) => {
   const [hovered, setHovered] = React.useState(false);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="border border-white/[0.4] group/canvas-card flex items-center justify-center dark:border-white/[0.2] w-full p-4 relative h-[28rem] overflow-hidden"
+      onClick={() => setHovered(true)}
+      className="border border-white/[0.4] cursor-pointer group/canvas-card flex items-center justify-center dark:border-white/[0.2] w-[90%] p-4 relative h-[28rem] overflow-hidden"
     >
       <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
       <Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
@@ -117,14 +129,15 @@ const Card = ({
       </AnimatePresence>
 
       <div className="relative z-20 max-w-full overflow-hidden">
-        <h1 className="text-white text-center text-xl md:text-2xl font-bold group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:opacity-0 transition duration-200 w-full mx-auto flex items-center justify-center">
+        <h1 className={`text-white text-center text-xl md:text-2xl font-bold group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:hidden transition duration-200 w-full mx-auto flex items-center justify-center ${hovered ?'hidden':'opacity-1000'} flex flex-col gap-2`}>
           {title}
+          <Image src={`/images/${im}.png`} alt='' width={100} height={100}/>
         </h1>
-        <h2 className="dark:text-white text-base md:text-lg text-center opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black mt-4 font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200 line-clamp-2">
+        <h2 className={`text-white text-base md:text-lg text-center hidden group-hover/canvas-card:block relative z-10  mt-4 font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200 line-clamp-2 ${hovered ?'opacity-100':''}`}>
           {ti}
         </h2>
         <div className="h-full overflow-y-auto">
-          <p className="dark:text-white text-sm md:text-base opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black mt-4 font-thin group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200 overflow-y-auto max-h-56 pr-2">
+          <p className={`text-white text-sm md:text-base opacity-0 group-hover/canvas-card:opacity-100 relative z-10 mt-4 font-thin group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200 overflow-y-auto max-h-56 pr-2 ${hovered ?'opacity-100':""}`}>
             {dec}
           </p>
         </div>
