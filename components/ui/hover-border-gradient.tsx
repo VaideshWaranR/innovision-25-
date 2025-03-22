@@ -16,16 +16,13 @@ export function HoverBorderGradient({
   clockwise = true,
   ...props
 }: React.PropsWithChildren<
-  {
-    as?: React.ElementType;
+  { children: React.ReactNode;
+    as?: React.ElementType<any>;
     containerClassName?: string;
     className?: string;
     duration?: number;
     clockwise?: boolean;
-  } & React.HTMLAttributes<HTMLElement> & {
-    onMouseEnter?: (event: React.MouseEvent<HTMLElement>) => void;
-    onMouseLeave?: (event: React.MouseEvent<HTMLElement>) => void;
-  }
+  } 
 >) {
   const [hovered, setHovered] = useState<boolean>(false);
   const [direction, setDirection] = useState<Direction>("TOP");
@@ -60,8 +57,7 @@ export function HoverBorderGradient({
     }
   }, [hovered]);
   return (
-    <Tag 
-    onMouseEnter={(event: React.MouseEvent<HTMLDivElement>) => {
+    <Tag onMouseEnter={(event: React.MouseEvent<HTMLDivElement>) => {
         setHovered(true);
       }}
       onMouseLeave={() => setHovered(false)}
@@ -71,33 +67,35 @@ export function HoverBorderGradient({
       )}
       {...props}
     >
-      <div
-        className={cn(
-          "w-auto text-white z-10 bg-black px-4 py-2 rounded-[inherit]",
-          className
-        )}
-      >
-        {children}
-      </div>
-      <motion.div
-        className={cn(
-          "flex-none inset-0 overflow-hidden absolute z-0 rounded-[inherit]"
-        )}
-        style={{
-          filter: "blur(2px)",
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-        }}
-        initial={{ background: movingMap[direction] }}
-        animate={{
-          background: hovered
-            ? [movingMap[direction], highlight]
-            : movingMap[direction],
-        }}
-        transition={{ ease: "linear", duration: duration ?? 1 }}
-      />
-      <div className="bg-black absolute z-1 flex-none inset-[2px] rounded-[100px]" />
+      <>
+        <div
+          className={cn(
+            "w-auto text-white z-10 bg-black px-4 py-2 rounded-[inherit]",
+            className
+          )}
+        >
+          {children}
+        </div>
+        <motion.div
+          className={cn(
+            "flex-none inset-0 overflow-hidden absolute z-0 rounded-[inherit]"
+          )}
+          style={{
+            filter: "blur(2px)",
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+          }}
+          initial={{ background: movingMap[direction] }}
+          animate={{
+            background: hovered
+              ? [movingMap[direction], highlight]
+              : movingMap[direction],
+          }}
+          transition={{ ease: "linear", duration: duration ?? 1 }}
+        />
+        <div className="bg-black absolute z-1 flex-none inset-[2px] rounded-[100px]" />
+      </>
     </Tag>
   );
 }
