@@ -129,15 +129,15 @@ const Card = ({
       </AnimatePresence>
 
       <div className="relative z-20 max-w-full overflow-hidden">
-        <h1 className={`text-white text-center text-xl md:text-2xl font-bold group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:hidden transition duration-200 w-full mx-auto flex items-center justify-center ${hovered ?'hidden':'opacity-1000'} flex flex-col gap-2`}>
+        <h1 className={`absolute text-white text-center text-xl md:text-2xl font-bold group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:hidden transition duration-200 w-full mx-auto flex items-center justify-center ${hovered ?'hidden':'opacity-1000'} flex flex-col gap-2`}>
           {title}
           <Image src={`/images/${im}.png`} alt='' width={100} height={100}/>
         </h1>
-        <h2 className={`text-white text-base md:text-lg text-center hidden group-hover/canvas-card:block relative z-10  mt-4 font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200 line-clamp-2 ${hovered ?'opacity-100':''}`}>
+        <h2 className={`text-white text-base md:text-lg text-center opacity-0 group-hover/canvas-card:block relative z-10  mt-4 font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200 line-clamp-2 ${hovered ?'opacity-100':''}`}>
           {ti}
         </h2>
         <div className="h-full overflow-y-auto">
-          <p className={`text-white text-sm md:text-base opacity-0 group-hover/canvas-card:opacity-100 relative z-10 mt-4 font-thin group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200 overflow-y-auto max-h-56 pr-2 ${hovered ?'opacity-100':""}`}>
+          <p className={`text-white text-[1rem] font-semibold md:text-base opacity-0 group-hover/canvas-card:opacity-100 relative z-10 mt-4  group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200 overflow-y-auto max-h-56 pr-2 ${hovered ?'opacity-100':""}`}>
             {dec}
           </p>
         </div>

@@ -75,7 +75,7 @@ const HeroSection = () => {
             className="flex flex-col items-center"
           >
             <div className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl min-w-[80px] shadow-lg border border-white/20">
-              <span className="text-4xl font-bold">{countdown[unit]}</span>
+              <span className="text-3xl font-bold">{countdown[unit]}</span>
             </div>
             <span className="text-xs mt-2 uppercase tracking-wide opacity-80">
               {unit}
