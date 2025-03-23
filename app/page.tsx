@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, { useEffect } from "react";
 import HeroSection from "./Components/HeroSection";
 import { AnimatedTooltipPreview } from "./Components/AnimatedTooltipPreview";
 import Footer from "./Components/Footer";
@@ -10,20 +10,27 @@ import Header from "./Components/Header";
 
 const page = () => {
   const scrollToContent = () => {
-    // You can specify the ID of the section you want to scroll to
-    const contentElement = document.getElementById("content-section");
-    if (contentElement) {
-      contentElement.scrollIntoView({ behavior: "smooth" });
-    } else {
-      // If no specific ID is found, just scroll down a screen height
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const newScroll = window.scrollY + window.innerHeight; // Scroll down by 1/4th of screen height
+  
+    if (window.scrollY + window.innerHeight >= maxScroll) {
+      // If already at the bottom, scroll back to the top
       window.scrollTo({
-        top: window.innerHeight,
+        top: 0,
+        behavior: "smooth",
+      });
+    } else {
+      // Otherwise, scroll down normally
+      window.scrollTo({
+        top: newScroll,
         behavior: "smooth",
       });
     }
   };
+  
+  
   return (
-    <div className="bg-black min-h-screen w-screen flex flex-col justify-center items-center scrollbar-hidden overflow-hidden">
+    <div className="bg-black min-h-screen w-screen flex flex-col justify-center items-center scrollbar-hidden overflow-hidden" id="content-section">
       <Header />
       <HeroSection />
       <IT />
