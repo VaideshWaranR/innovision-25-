@@ -7,7 +7,7 @@ import Image from "next/image";
 const Events = () => {
   return (
     <div className="bg-black">
-      <h1 className="text-white text-center text-2xl font-bold uppercase">Domains</h1>
+      <h1 className="text-white text-center text-2xl font-bold uppercase flex flex-col gap-1">Domains <span className="text-sm font-thin">( hover to view description )</span></h1>
       <div className="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto px-8 sm:px-6 lg:px-8 max-w-7xl place-items-center">
         <Card
           title="POWEROID"

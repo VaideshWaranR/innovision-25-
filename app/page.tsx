@@ -7,6 +7,7 @@ import IT from "./Components/IT";
 import { Rules } from "./Components/Rules";
 import Events from "./Components/Events";
 import Header from "./Components/Header";
+import PrizePool from "./Components/PrizePool";
 
 const page = () => {
   const scrollToContent = () => {
@@ -34,6 +35,7 @@ const page = () => {
       <Header />
       <HeroSection />
       <IT />
+      <PrizePool />
       <Events />
       <Rules />
       <Footer />
