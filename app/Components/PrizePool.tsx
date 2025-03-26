@@ -44,7 +44,7 @@ export default function PrizePool() {
             snap: { innerText: 1 },
             onUpdate: function () {
               // @ts-ignore - GSAP's typing doesn't include innerText
-              prizeValue.innerHTML = `$${Math.floor(this.targets()[0].innerText).toLocaleString()}`
+              prizeValue.innerHTML = `${Math.floor(this.targets()[0].innerText).toLocaleString()}`
             },
           },
           "-=0.6",
