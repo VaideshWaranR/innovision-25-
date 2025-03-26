@@ -194,7 +194,7 @@ export default function PrizePool() {
 
               <h2 className="text-2xl font-bold text-center text-white mb-2">FIRST PRIZE</h2>
 
-              <div className="prize-value text-5xl font-bold text-center text-white my-6">💵6,000</div>
+              <div className="prize-value text-5xl font-bold text-center text-white my-6">6,000</div>
 
               
             </div>
@@ -235,7 +235,7 @@ export default function PrizePool() {
 
               <h2 className="text-2xl font-bold text-center text-white mb-2">SECOND PRIZE</h2>
 
-              <div className="prize-value text-5xl font-bold text-center text-white my-6">💵4,500</div>
+              <div className="prize-value text-5xl font-bold text-center text-white my-6">4,500</div>
 
             </div>
           </div>
@@ -275,7 +275,7 @@ export default function PrizePool() {
 
               <h2 className="text-2xl font-bold text-center text-white mb-2">THIRD PRIZE</h2>
 
-              <div className="prize-value text-5xl font-bold text-center text-white my-6">💵3,000</div>
+              <div className="prize-value text-5xl font-bold text-center text-white my-6">3,000</div>
 
             </div>
           </div>
