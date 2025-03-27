@@ -12,11 +12,16 @@ const HeroSection = () => {
     minutes: 0,
     seconds: 0,
   });
+  const [isIOS, setIsIOS] = useState(false);
 
   // Set the target date - example: May 15, 2025
   const targetDate = new Date("March 29, 2025").getTime();
 
   useEffect(() => {
+    const userAgent = navigator.userAgent || navigator.vendor;
+    if (/iPhone|iPad|iPod/i.test(userAgent)) {
+      setIsIOS(true);
+    }
     const updateCountdown = () => {
       const now = new Date().getTime();
       const distance = targetDate - now;
@@ -49,10 +54,12 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 py-8 flex-grow">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* Spline Model Container - Full width on mobile, left side on desktop */}
-          <div className="w-full lg:w-1/2 h-[50vh] lg:h-[70vh] relative order-2 lg:order-1">
-          <div className="h-[55px] w-[200px] bottom-1 right-0 bg-black absolute"></div>
-            <Spline scene="https://prod.spline.design/YrjdCaszJ9zPSoSp/scene.splinecode" />
-          </div>
+          {!isIOS && <div className="w-full lg:w-1/2 h-[50vh] lg:h-[70vh] relative order-2 lg:order-1">
+         <div className="h-[55px] w-[200px] bottom-1 right-0 bg-black absolute"></div>
+            <Spline 
+            scene="https://prod.spline.design/YrjdCaszJ9zPSoSp/scene.splinecode" 
+            />
+          </div>}
 
           {/* Text Container - Full width on mobile, right side on desktop */}
           <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-2">
